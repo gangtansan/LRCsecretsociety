@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bellhauser & Co.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+KR:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0e0d0b;--surface:#161411;--bh:#1e1b17;--bu:#2a2318;
+    --ac:#b8974a;--acd:#7a6230;--tx:#d4c9b0;--txd:#7a7060;--txm:#4a4438;--bd:#2a2520;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--tx);font-family:'Noto Serif KR',serif;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+  .al{height:2px;background:linear-gradient(90deg,transparent,var(--acd),var(--ac),var(--acd),transparent);flex-shrink:0}
+  .hd{background:var(--surface);border-bottom:1px solid var(--bd);padding:14px 20px;display:flex;align-items:center;gap:14px;flex-shrink:0}
+  .av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#2a2318,#3a3020);border:1px solid var(--acd);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--ac);flex-shrink:0}
+  .hn{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:var(--ac);letter-spacing:.08em}
+  .hs{font-size:11px;color:var(--txd);margin-top:2px;letter-spacing:.05em}
+  .sd{display:inline-block;width:6px;height:6px;border-radius:50%;background:#4a7a5a;margin-right:5px;vertical-align:middle}
+  .ca{flex:1;overflow-y:auto;padding:24px 16px;display:flex;flex-direction:column;gap:0;scroll-behavior:smooth}
+  .ca::-webkit-scrollbar{width:4px}
+  .ca::-webkit-scrollbar-thumb{background:var(--bd);border-radius:2px}
+  .msg{display:flex;gap:10px;margin-bottom:6px;animation:fu .3s ease forwards;opacity:0}
+  @keyframes fu{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .msg.fu{flex-direction:row-reverse}
+  .mav{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#2a2318,#3a3020);border:1px solid var(--acd);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:12px;color:var(--ac);flex-shrink:0;align-self:flex-end}
+  .bw{display:flex;flex-direction:column;max-width:82%}
+  .msg.fu .bw{align-items:flex-end}
+  .bb{padding:12px 16px;font-size:13.5px;line-height:1.8;letter-spacing:.02em}
+  .msg:not(.fu) .bb{background:var(--bh);border:1px solid var(--bd);border-radius:18px;border-bottom-left-radius:4px;color:var(--tx)}
+  .msg.fu .bb{background:var(--bu);border:1px solid #3a3020;border-radius:18px;border-bottom-right-radius:4px;color:var(--tx)}
+  .bt{font-size:10px;color:var(--txm);margin-top:4px;letter-spacing:.05em}
+  .ot{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--ac);letter-spacing:.1em;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--bd)}
+  .os{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+  .sb{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;letter-spacing:.06em;padding:6px 14px;border-radius:6px;font-family:'Cormorant Garamond',serif;border:2px solid}
+  .spp{background:#1a3a28;border-color:#3a8a58;color:#7adda0}
+  .sp{background:#162a20;border-color:#2a6a44;color:#5abd80}
+  .smm{background:#3a1818;border-color:#8a3030;color:#e08080}
+  .sm{background:#2a1414;border-color:#6a2424;color:#c06060}
+  .sn{background:#1e1c18;border-color:#4a4438;color:#8a8070}
+  .oop{font-size:14px;line-height:1.85;color:var(--tx);font-style:italic;font-family:'Cormorant Garamond',serif;margin-bottom:12px}
+  .odv{height:1px;background:var(--bd);margin:12px 0}
+  .oi{font-size:13px;line-height:1.8;color:#a09880}
+  .ty{display:flex;align-items:flex-end;gap:10px;margin-bottom:6px}
+  .tyd{background:var(--bh);border:1px solid var(--bd);border-radius:18px;border-bottom-left-radius:4px;padding:12px 16px;display:flex;gap:5px;align-items:center}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--txd);animation:bk 1.2s infinite}
+  .dot:nth-child(2){animation-delay:.2s}
+  .dot:nth-child(3){animation-delay:.4s}
+  @keyframes bk{0%,80%,100%{opacity:.3;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+  .dd{text-align:center;margin:16px 0;font-size:11px;color:var(--txm);letter-spacing:.1em;display:flex;align-items:center;gap:12px}
+  .dd::before,.dd::after{content:'';flex:1;height:1px;background:var(--bd)}
+  .mg{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}
+  .mb{background:transparent;border:1px solid var(--bd);border-radius:10px;padding:8px 6px;color:var(--txd);font-family:'Noto Serif KR',serif;font-size:11.5px;cursor:pointer;transition:all .2s;letter-spacing:.02em;text-align:center;line-height:1.4}
+  .mb:hover{border-color:var(--acd);color:var(--ac);background:rgba(184,151,74,.06)}
+  .mb:active{transform:scale(.97)}
+  .mb.done{border-color:#252520;color:#3a3a38;cursor:default;pointer-events:none;font-size:10.5px}
+  .ia{background:var(--surface);border-top:1px solid var(--bd);padding:12px 16px;flex-shrink:0;text-align:center}
+  .ih{font-size:11px;color:var(--txm);letter-spacing:.05em;font-family:'Cormorant Garamond',serif;font-style:italic}
+</style>
+</head>
+<body>
+<div class="al"></div>
+<div class="hd">
+  <div class="av">LB</div>
+  <div>
+    <div class="hn">LAWRENCE BELLHAUSER</div>
+    <div class="hs"><span class="sd"></span>활성 · Bellhauser &amp; Co.</div>
+  </div>
+</div>
+<div class="ca" id="ca"><div class="dd">BRIEFING SESSION</div></div>
+<div class="ia"><div class="ih">조직을 선택하면 로렌스가 브리핑을 시작합니다.</div></div>
+<script>
+const orgs={
+  "마법학회":{op:"정신병자 집단일세. 자신들이 질서의 수호자라고 믿어.\n하지만 어떤 정의를 추구하든 마법을 쓰는 한 그들은 자연을 속이는 사기꾼에 지나지 않네.",fv:"--",im:"++",info:"영국에서 가장 크고 권위있는 마법사 단체입니다. 영국인이 마법사가 된다면 으레 이곳에 가입하기를 추천받습니다. 마법학회에 속하면 무슨 일이든 무난하게 회원들의 도움을 받고 헤쳐나갈 수 있습니다. 강력한 영향력과 많은 회원을 보유하였기에 회장이 큰 책임감을 느끼고 회원들을 전두지휘합니다. 그 일환으로 마법과 관련해서 일어나는 분란에 적극 개입하여 인간 사회에 미치는 악영향을 줄이려 합니다."},
+  "연금술사회":{op:"실리와 물질적 성과를 추구하지. 이득만 있다면 결과가 어떻든 상관하지 않아.\n반대로 말하자면 손해를 입히는 자들은 세상 끝까지 추격해서 보복한다는 뜻이야.",fv:"+",im:"+",info:"역사 자체는 마법학회보다 더 오래되었습니다. 자신들을 일종의 철학자로 간주합니다. 연금술을 실제 납에서 황금을 추출하는 행위보다는 개념의 변화 과정을 비유하는 이미지로 설명합니다. 마법보다 일종의 화학, 물리학, 약학 등 과학 분야와 맞닿아 있습니다. 물질적으로 성과를 얻는 데 집중하며 하물며 눈에 보이지 않는 성과라도 사고관의 변화 등 특정한 변화와 확실한 결과를 얻고 싶어 합니다. 덧붙여 장삿속이 밝아 가장 이해타산적인 조직입니다."},
+  "마녀회":{op:"가슴에 광기가 깃든 낭만주의자들의 모임이야. 밤이슬에 비친 달빛에서 태어난다고 주장해.\n악마와 소통하고 달에게 말을 걸고 몇 번이고 불태워져도 사람을 사랑하는 족속들이지.",fv:"0",im:"0",info:"전원 여성 마법사로 이루어진 조직입니다. 마법학회에 반해 세상에 인정받지 못하고 핍박받은 세월이 길지만 그렇기 때문에 더욱 결속력이 강하고 회원간 의리가 중시됩니다. 자연 친화적인 방법의 약학과 저주술, 축복에 두각을 드러냅니다. 이들은 힘과 연구의 원천으로 각자가 가진 상처와 이로 인한 광기를 사용합니다."},
+  "드루이드연맹":{op:"유서깊은 환경주의자들이야. 그들이 믿는 바를 따르는 것 뿐이지만.\n오죽 환경 중심으로 행동하면 심지어 자연 그 자체로 모습을 바꿀 수도 있어.",fv:"0",im:"0",info:"고대 켈트 문화에 뿌리를 둔 사제 계급인 드루이드의 전통을 계승한 연맹입니다. 자연의 순환과 생명의 균형을 신성하게 여기며, 숲과 강, 대지를 터전 삼아 활동합니다. 치유와 예언, 자연 소환에 능하며 오랜 세월 구전으로 전해진 방대한 지식 체계를 보유하고 있습니다. 자연과의 합일을 극한까지 추구하는 수행자는 동물이나 나무 등 자연물로 완전히 형태를 바꾸기도 합니다."},
+  "카르밀라의 딸들":{op:"객관적인 평가가 힘든 집단이군.\n우선 인간과는 전혀 다른 사고방식으로 움직여. 무척 보수적이지만 전형적으로 움직이기를 기대하지 말게.",fv:"+",im:"+",info:"이름은 딸들이지만 성별에 관련 없이 뱀파이어거나 유사한 특징을 가진 아종, 변종이라면 누구든 받아주는 뱀파이어 모임입니다. 카르밀라의 딸들을 자칭하는 이유는 대중에게 흡혈귀를 가장 먼저 알린 작품이 소설 <카르밀라>이기 때문입니다. 당연히 <카르밀라> 발표 이전부터 살아온 뱀파이어도 많아요. 회원은 <카르밀라> 속 뱀파이어의 특징을 가진 정통 뱀파이어 소수와 아종 다수로 이루어져 있습니다. 결속은 느슨하나 오랜 수명으로 쌓은 자본력이 가장 뛰어납니다."},
+  "엘프 클랜":{op:"지독할 만큼 혈연중심적이야. 종친회라고 부르는 게 더 알맞을 듯 하군.\n배타적이고 자신들의 안위를 최우선으로 둬. 자연 친화적이라는 점은 드루이드 연맹과 비슷하지만 이들은 보호를 넘어서 기술을 배척하는 수준에 와 있네. 타 종족과 혈통이 섞이는 것도 꺼려하지.",fv:"0",im:"0",info:"오랜 수명과 날카로운 감각을 지닌 종족으로, 자연 속에 공동체를 이루어 생활합니다. 인간 사회와는 최소한의 접점만을 유지하며, 외부인에게 클랜의 내부를 거의 공개하지 않습니다. 철저한 혈통 중심 문화를 가지며, 혼혈이나 타 종족과의 결합을 금기시하는 경향이 강합니다. 오랜 역사만큼 방대한 자연 지식과 고유한 언어 체계를 보유하고 있습니다."},
+  "MI5":{op:"국가 안보를 위해 무슨 짓이든 해. 괜히 국가에서 운영하는 소수 정예와 정면으로 충돌하고 싶은 머저리가 있다면 말하게. 당장 해고해주겠네.\n나는 영국 시민이니 정부에게 밉보일 생각일랑 없어.",fv:"0",im:"+",info:"영국의 국내 방첩 및 보안 정보기관입니다. 공식 명칭은 보안국(Security Service)이며, 국내의 테러·간첩·전복 활동을 감시하고 차단하는 것을 주임무로 합니다. 법적 집행권은 없으나 경찰 및 타 기관과 긴밀히 협력하며, 요원들의 신원은 엄격히 비밀로 유지됩니다. 초자연적 존재들의 동향 역시 감시 대상에 포함되어 있는 것으로 알려져 있습니다."},
+  "피타고라스의 삼각형":{op:"피타고라스 학파의 정신을 이어받은 자칭 철학자들이야. 콩을 먹지 않고, 수식으로 마법을 실행해.\n작은 세모가 되기 위해서는 엄격한 시험 절차를 밟아야 하고, 여간 똑똑한 게 아니라면 그들의 마법을 이해하지 못해.\n나? 나는 너흴 부리면 되는데 이해할 필요가 뭐가 있지?",fv:"0",im:"0",info:null},
+  "수인들":{op:"하도 크고 작은 연합이 많아서. 자신과 비슷한 동물군과 그 아종끼리 어울린다고 들었어.\n그들의 영역을 무시하거나 금기를 존중하지 않는 행동만 아니면 크게 미움 살 일은 없네.",fv:"0",im:"0",info:null}
+};
+const keys=Object.keys(orgs);
+let sel=new Set();
+function gt(){const n=new Date();return String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')}
+function sc(v){if(v==="++")return"spp";if(v==="+")return"sp";if(v==="--")return"smm";if(v==="-")return"sm";return"sn"}
+function sl(p,v){return v==="0"?`${p} 중립`:`${p} ${v}`}
+function si(v){if(v==="++"||v==="+")return"▲";if(v==="--"||v==="-")return"▼";return"●"}
+function aMsg(html,fh,d=0){return new Promise(r=>{setTimeout(()=>{const ca=document.getElementById('ca');const el=document.createElement('div');el.className=`msg${fh?'':' fu'}`;el.innerHTML=fh?`<div class="mav">LB</div><div class="bw"><div class="bb">${html}</div><div class="bt">${gt()}</div></div>`:`<div class="bw"><div class="bb">${html}</div><div class="bt">${gt()}</div></div>`;ca.appendChild(el);ca.scrollTop=ca.scrollHeight;r(el)},d)})}
+function showT(ms=800){return new Promise(r=>{const ca=document.getElementById('ca');const d=document.createElement('div');d.className='ty';d.id='ty';d.innerHTML='<div class="mav">LB</div><div class="tyd"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';ca.appendChild(d);ca.scrollTop=ca.scrollHeight;setTimeout(()=>{d.remove();r()},ms)})}
+async function init(){await showT(900);const ca=document.getElementById('ca');const d=document.createElement('div');d.className='msg';const g=keys.map(n=>`<button class="mb" id="b${keys.indexOf(n)}" onclick="pick('${n}')">${n}</button>`).join('');d.innerHTML=`<div class="mav">LB</div><div class="bw"><div class="bb">어떤 조직이 궁금하지?<div class="mg">${g}</div></div><div class="bt">${gt()}</div></div>`;ca.appendChild(d);ca.scrollTop=ca.scrollHeight}
+async function pick(name){if(sel.has(name))return;sel.add(name);const i=keys.indexOf(name);const btn=document.getElementById('b'+i);if(btn){btn.classList.add('done');btn.textContent='✓ '+name}await aMsg(name,false);await showT(650+Math.random()*500);const o=orgs[name];const opH=o.op.replace(/\n/g,'<br>');let inf='';if(o.info)inf=`<div class="odv"></div><div class="oi">${o.info}</div>`;const html=`<div class="ot">— ${name}</div><div class="os"><span class="sb ${sc(o.fv)}"><span>${si(o.fv)}</span> ${sl('우호도',o.fv)}</span><span class="sb ${sc(o.im)}"><span>${si(o.im)}</span> ${sl('중요도',o.im)}</span></div><div class="oop">${opH}</div>${inf}`;await aMsg(html,true);if(sel.size===keys.length){await showT(1200);await aMsg(`우리가 주시해야 하는 집단은 뭐 이 정도일세.<br><br><span style="font-style:italic;color:var(--txd);">너무 많다고? 죽음을 거스르는 게 쉬운 일인 것 같은가.</span>`,true)}}
+window.addEventListener('load',()=>setTimeout(init,500));
+</script>
+</body>
+</html>
